@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Decoder</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgba(255, 251, 235, 0.67);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-image: url('emojis_bkrng.webp');
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 251, 235, 0.77);
+        }
+
+        .card {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fc7300;
+            border-radius: 10px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+            color: #FFFBEB;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .input, .button {
+            width: 90%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .input {
+            width: 84%;
+        }
+
+        .input:focus {
+            outline: none;
+        }
+
+
+        .button:hover {
+            background-color: #251749;
+        }
+
+        .decode {
+            background-color: #068FFF;
+            color: #FFFBEB;
+            box-shadow: 0px 6px 12px rgba(0, 102, 255, 0.3);
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            outline: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .decode:hover {
+            background-color: #4E4FEB;
+        }
+
+        .decode:active {
+            animation: buttonPress 0.15s ease-out forwards;
+        }
+
+        @keyframes buttonPress {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(0.95);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .result {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .error, .warning {
+            color: #000333;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .footer {
+            background-color: rgba(255, 251, 235, 0.67);
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="overlay"></div>
+    <div class="card">
+        <div class="header">Emoji Decoder</div>
+        <input type="text" id="emojiInput" class="input" placeholder="Enter emoji string">
+        <button id="decodeButton" class="button decode">Decode</button>
+        <div id="decodedMessage" class="result"></div>
+        <div id="errorMessage" class="error"></div>
+        <div id="warningMessage" class="warning"></div>
+    </div>
+</div>
+<div class="footer">&copy; 2023 Emoji Decoder</div>
+
+<script>
+    const emojiMap = {
+        '😀': 'A', '😁': 'B', '😂': 'C', '🤣': 'D', '😃': 'E',
+        '😄': 'F', '😅': 'G', '😆': 'H', '😇': 'I', '😈': 'J',
+        '😉': 'K', '😊': 'L', '😋': 'M', '😌': 'N', '😍': 'O',
+        '😎': 'P', '😏': 'Q', '😐': 'R', '😑': 'S', '😒': 'T',
+        '😓': 'U', '😔': 'V', '😕': 'W', '😖': 'X', '😗': 'Y',
+        '😘': 'Z',
+        // Add more emoji mappings as needed
+    };
+
+    const emojiInput = document.getElementById('emojiInput');
+    const decodeButton = document.getElementById('decodeButton');
+    const decodedMessage = document.getElementById('decodedMessage');
+    const errorMessage = document.getElementById('errorMessage');
+    const warningMessage = document.getElementById('warningMessage');
+
+    decodeButton.addEventListener('click', () => {
+        errorMessage.textContent = '';
+        decodedMessage.textContent = '';
+        warningMessage.textContent = '';
+
+        const inputText = emojiInput.value.trim();
+        if (!inputText) {
+            warningMessage.textContent = 'Please enter an emoji string';
+            return;
+        }
+
+        if (!isValidEmojiInput(inputText)) {
+            warningMessage.textContent = 'Invalid input. Please use emojis only.';
+            return;
+        }
+
+        const decodedText = decodeEmojiString(inputText);
+        if (decodedText === '') {
+            errorMessage.textContent = 'Invalid input. Please use emojis only.';
+        } else {
+            decodedMessage.textContent = decodedText;
+        }
+    });
+
+    function isValidEmojiInput(text) {
+        // Regular expression to match emojis
+        const emojiRegex = /(?:[\u2700-\u27BF]|(?:\uD83C[\uDDE6-\uDDE9\uDDF2\uDDF3\uDDF4\uDDF5\uDDF6\uDDF7\uDDF8\uDDF9\uDDFA\uDDFB\uDDFC\uDDFD\uDDFE\uDDFF])|\uD83D[\uDC00-\uDE4F\uDFFD])/g;
+
+        // Test if the input contains only emojis
+        return emojiRegex.test(text);
+    }
+
+    function decodeEmojiString(emojiString) {
+        const emojis = emojiString.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) || [];
+        let decodedText = '';
+
+        for (const emoji of emojis) {
+            const mappedChar = emojiMap[emoji];
+            if (mappedChar !== undefined) {
+                decodedText += mappedChar;
+            } else {
+                decodedText += emoji; // Keep the emoji if not in the mapping
+            }
+        }
+
+        return decodedText;
+    }
+</script>
+</body>
+</html>
