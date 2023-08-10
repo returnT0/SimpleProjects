@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Joke Generator</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100">
+<div class="flex flex-col items-center justify-center min-h-screen">
+  <div class="w-full max-w-lg p-6 bg-white rounded-lg shadow-md">
+    <h1 class="text-4xl font-semibold text-indigo-600 mb-6">
+      <span class="google-logo text-5xl mr-2 text-indigo-600"></span>
+      Dark Jokes
+    </h1>
+    <div id="jokeDisplay" class="hidden mt-4 p-6 bg-gray-100 rounded-lg shadow-md text-center">
+    </div>
+    <button id="generateBtn" class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-full shadow-lg">
+      Generate Joke
+    </button>
+    <button id="shareBtn" class="mt-4 w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 rounded-full shadow-lg" disabled>
+      Share Joke
+    </button>
+
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

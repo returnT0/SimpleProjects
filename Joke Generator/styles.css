@@ -1,0 +1,22 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 0 auto;
+}
+
+.google-logo {
+    font-size: 2rem;
+    vertical-align: middle;
+}
+
+button:hover {
+    background-color: #4C51BF;
+}
+
+#jokeDisplay {
+    font-size: 1.125rem;
+}
