@@ -2,6 +2,7 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    background: #6A2C70;
 }
 
 .container {
@@ -13,8 +14,24 @@ body {
     vertical-align: middle;
 }
 
-button:hover {
-    background-color: #4C51BF;
+#generateBtn {
+    background-color: #AF0171;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#generateBtn:hover {
+    background-color: #E80F88;
+    transform: scale(1.01);
+}
+
+#shareBtn {
+    background-color: #4C0033;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#shareBtn:hover {
+    background-color: #790252;
+    transform: scale(1.01);
 }
 
 #jokeDisplay {
