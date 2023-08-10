@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive ASCII Art</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      color: #F9ED69; /* Set the font color */
+      background-color: #6A2C70; /* Set the background color */
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    h1::selection {
+      background: #F9ED69;
+      color: #6A2C70;
+    }
+
+    #asciiOutput {
+      font-family: 'Courier New', monospace;
+      font-size: 14px; /* Adjust the font size here */
+      white-space: pre;
+      color: #f0f0f0;
+    }
+
+    #textInput::selection {
+      background: #F9ED69;
+      color: #6A2C70;
+    }
+
+    #asciiOutput::selection {
+      background: #F9ED69;
+      color: #6A2C70;
+    }
+
+    .btn-custom {
+      width: 80px;
+      background-color: #F08A5D;
+      border-color: #F08A5D;
+      color: #f0f0f0;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .btn-custom:hover {
+      background-color: #B83B5E;
+      border-color: #B83B5E;
+      color: #f0f0f0;
+    }
+
+
+    .active {
+      color: #B83B5E;
+      background-color: #F9ED69;
+    }
+
+  </style>
+</head>
+<body>
+<div class="container text-center mt-5">
+  <h1>Interactive ASCII Art Generator</h1>
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+      <textarea id="textInput" rows="5" class="form-control" placeholder="Enter your text here"></textarea>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+      <pre id="asciiOutput"></pre>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-8">
+      <div id="outputOptions">
+        <button id="boldButton" class="btn btn-custom"><strong>B</strong></button>
+        <button id="italicButton" class="btn btn-custom"><em>I</em></button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
