@@ -1,0 +1,62 @@
+/* Reset default browser styles */
+body, h1, p, ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set a background color */
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+/* Center the quiz container vertically and horizontally */
+.quiz-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* 100% of the viewport height */
+}
+
+/* Style the question text */
+#question {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* Style the answer options */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 18px; /* Fixed font size for all buttons */
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Blue button color */
+    color: #fff; /* White text color */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Style the feedback message */
+#feedback {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+    color: #28a745; /* Green for correct, you can change to red for wrong */
+}
